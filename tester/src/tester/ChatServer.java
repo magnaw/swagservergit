@@ -26,7 +26,7 @@ import java.util.HashSet;
 public class ChatServer {
 
 
-    private static final int PORT = 9001;
+    private static final int PORT = 2350;
 
 
     
@@ -49,7 +49,6 @@ public class ChatServer {
     public static void main(String[] args) throws Exception {
         System.out.println("The chat server is running.");
         ServerSocket listener = new ServerSocket(PORT);
-        
         try {
             while (true) {
                 new Handler(listener.accept()).start();
@@ -94,7 +93,7 @@ public class ChatServer {
 
                 // Streams for klienten
                 in = new BufferedReader(new InputStreamReader(
-                    socket.getInputStream()));
+                    socket.getInputStream(), "UTF-8"));
                 out = new PrintWriter(socket.getOutputStream(), true);
 
                 /**
@@ -140,7 +139,7 @@ public class ChatServer {
                         return;
                     }
                     for (PrintWriter writer : printWriters) {
-                        writer.println("BESKED " + brugernavn + ": " + input);
+                        writer.println("BESKED  " + brugernavn + ": " + input);
                     }
                 }
             } catch (IOException e) {
